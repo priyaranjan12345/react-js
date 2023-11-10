@@ -36,7 +36,7 @@ basic - projects
 10. mini-context [context_api] prop drilling, 1.Redux --> [react-redux or redux-tool-kit], 2.zustand
 11. theme-switcher [context_api]
 12. todo-app [context_api]
-13. [redux tool kit]
+13. todo-redux-toolkit [redux tool kit]
 
 road map
 - routing
