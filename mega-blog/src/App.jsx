@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import authService from "./appwrite/auth"
 import { login, logout } from "./store/authSlice"
 import { Header, Footer } from "./components"
+import { Outlet } from "react-router-dom"
 
 
 function App() {
@@ -17,11 +18,8 @@ function App() {
         } else {
           dispatch(logout())
         }
-      })
-      .catch((err) => { console.log(err);})
-      .finally(() => {
-        setLoading(false)
-      })
+      }).finally(() => setLoading(false)
+      )
   }, [])
 
   return !loading ? (
@@ -30,7 +28,7 @@ function App() {
         <div className="w-full block">
           <Header />
           <main>
-            {/* <Outlet /> */}
+            <Outlet />
           </main>
           <Footer />
         </div>

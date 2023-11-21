@@ -1,5 +1,5 @@
 import config from "../config/config.js";
-import { Client, Account, ID, Databases, Storage, Query } from "appwrite";
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
     client = new Client()
@@ -11,43 +11,38 @@ export class Service {
             .setEndpoint(config.appwriteUrl)
             .setProject(config.appwriteProjectId)
 
-        this.databases = Databases(this.client)
-        this.bucket = Storage(this.client)
+        this.databases = new Databases(this.client)
+        this.bucket = new Storage(this.client)
     }
 
     async getPosts() {
-        try {
-            return await this.databases.getDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId
-            )
-        } catch (error) {
-            throw error
-        }
+        return await this.databases.getDocument(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId
+        )
     }
 
     async getActivePosts(queries = [Query.equal("status", "active")]) {
         try {
-            return await this.databases.listDocument(
+            return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                queries
+                queries,
             )
         } catch (error) {
             console.log("get active posts error: " + error);
+            return false
         }
     }
 
     async getPost(slug) {
-        try {
-            return await this.databases.getDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug
-            )
-        } catch (error) {
-            throw error
-        }
+
+        return await this.databases.getDocument(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId,
+            slug
+        )
+
     }
 
     async createPost({ title, slug, content, featuredImage, status, userId }) {
@@ -71,21 +66,19 @@ export class Service {
     }
 
     async updatePost(slug, { title, content, featuredImage, status }) {
-        try {
-            return await this.databases.updateDocument(
-                config.appwriteDatabaseId,
-                config.appwriteCollectionId,
-                slug,
-                {
-                    title,
-                    content,
-                    featuredImage,
-                    status,
-                }
-            )
-        } catch (error) {
-            throw error
-        }
+
+        return await this.databases.updateDocument(
+            config.appwriteDatabaseId,
+            config.appwriteCollectionId,
+            slug,
+            {
+                title,
+                content,
+                featuredImage,
+                status,
+            }
+        )
+
     }
 
     async deletePost(slug) {
@@ -143,6 +136,6 @@ export class Service {
 
 }
 
-const service = new Service()
+const appwriteService = new Service()
 
-export default service
+export default appwriteService

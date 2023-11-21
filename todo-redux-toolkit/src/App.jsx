@@ -1,4 +1,4 @@
-import { useSelector, Provider } from 'react-redux'
+import { Provider } from 'react-redux'
 import { store } from './app/store'
 import AddTodo from './components/AddTodo'
 import Todos from './components/Todos'

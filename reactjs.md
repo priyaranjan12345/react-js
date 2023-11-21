@@ -37,7 +37,7 @@ basic - projects
 11. theme-switcher [context_api]
 12. todo-app [context_api]
 13. todo-redux-toolkit [redux-tool-kit]
-14. blog posting app [full flex] libs: [react-route-dom, ]
+14. blog posting app [full flex] libs: [react-route-dom, react-redux, redux-tool-kit]
 
 road map
 - routing
